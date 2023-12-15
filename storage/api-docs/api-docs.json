@@ -1,0 +1,134 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Track & Trace API Documentation",
+        "description": "Track & Trace API Documentation",
+        "contact": {
+            "email": "admin@admin.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://127.0.0.1:8000",
+            "description": "Test API Server"
+        }
+    ],
+    "paths": {
+        "/api/v1/scanner/product-component-details": {
+            "get": {
+                "tags": [
+                    "Scanner"
+                ],
+                "summary": "get product component details",
+                "description": "Product component details",
+                "operationId": "product-component-details",
+                "responses": {
+                    "200": {
+                        "description": "Product component details fetched successfully."
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/scanner/product": {
+            "get": {
+                "tags": [
+                    "Scanner"
+                ],
+                "summary": "match product",
+                "description": "Match Product Chassis Number",
+                "operationId": "product",
+                "parameters": [
+                    {
+                        "name": "Chassis Number",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "default": "AC-1234"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Chassis Number matched successfully."
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/scanner/raw-material": {
+            "get": {
+                "tags": [
+                    "Scanner"
+                ],
+                "summary": "match raw-material",
+                "description": "Match Raw Material id & Order",
+                "operationId": "raw-material",
+                "parameters": [
+                    {
+                        "name": "Chassis Number",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "default": "AC-1234"
+                        }
+                    },
+                    {
+                        "name": "Raw Material Id",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "default": "225SCCH"
+                        }
+                    },
+                    {
+                        "name": "Order Id",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "default": "3"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Raw Material matched successfully."
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "name": "bearerAuth",
+                "in": "header",
+                "bearerFormat": "JWT",
+                "scheme": "bearer"
+            }
+        }
+    }
+}
