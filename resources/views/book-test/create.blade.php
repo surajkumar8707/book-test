@@ -178,118 +178,100 @@
         </div>
     </nav>
 
-
-    <!-- Swiper -->
-    <div class="swiper-container" style="overflow: hidden;">
-        <div class="swiper-wrapper">
-            <!-- Card 1 -->
-            @foreach ($texts as $text)
-                {{-- @dd($text->toArray()) --}}
-                <div class="swiper-slide">
-                    <div class="healthCard">
-                        <div class="card-content">
-                            {{-- <div class="offerHeight"><small class="offLabel">3% OFF</small></div> --}}
-                            <div class="card-title h5">{{ $text?->name }}</div>
-                            <div class="card-title">{{ $text?->simple_guideline }}</div>
-                            <div class="mb-2 card-subtitle h6">₹{{ $text?->price }} <span
-                                    class="text-muted">₹{{ $text?->price }}</span></div>
-                            {{-- <div class="search-list-height text-center">
-                <div class="compareSecWrap">
-                  <div class="compareSec">Add to compare</div>
-                </div>
-              </div> --}}
-                            <p class="card-text"></p>
-                            <div class="cardBtnWrap">
-                                <a href="{{ route('book-test.create', [base64_encode($text?->id)]) }}"
-                                    class="rounded-pill mr-2 btn btn-outline-info">Book Test</a>
-                                {{-- <button type="button" class="rounded-pill mr-2 btn btn-danger">Add To Cart</button> --}}
-                            </div>
-                        </div>
+    <div class="container mb-5">
+        <div class="row">
+            <div class="col-6">
+                <div class="card">
+                    <div class="card-header p-3">
+                        <h3>Schedule</h3>
+                    </div>
+                    <div class="card-body p-3">
+                        <table class="table table-striped">
+                            <tr>
+                                <td>Name</td>
+                                <td>{{$text?->name}}</td>
+                            </tr>
+                            <tr>
+                                <td>Code</td>
+                                <td>#{{$text?->code}}</td>
+                            </tr>
+                            <tr>
+                                <td>Location</td>
+                                <td>{{$text?->location}}</td>
+                            </tr>
+                            <tr>
+                                <td>Category</td>
+                                <td>{{$text?->category}}</td>
+                            </tr>
+                            <tr>
+                                <td>Schedule</td>
+                                <td>{{$text?->schedule}}</td>
+                            </tr>
+                            <tr>
+                                <td>Price</td>
+                                <td>{{$text?->price}}</td>
+                            </tr>
+                            <tr>
+                                <td>Reportedon</td>
+                                <td>{{$text?->reportedon}}</td>
+                            </tr>
+                            <tr>
+                                <td>Guideline</td>
+                                <td>{{$text?->simple_guideline}}</td>
+                            </tr>
+                        </table>
                     </div>
                 </div>
-            @endforeach
-
-            <!-- Card 2 -->
-            {{-- <div class="swiper-slide">
-        <div class="healthCard">
-          <div class="card-content">
-            <div class="offerHeight"><small class="offLabel">33% OFF</small></div>
-            <div class="card-title h5">COMPLETE CARE DIABETES</div>
-            <div class="mb-2 card-subtitle h6">₹999 <span class="text-muted">₹1490</span></div>
-            <div class="search-list-height text-center">
-              <div class="compareSecWrap">
-                <div class="compareSec">Add to compare</div>
-              </div>
             </div>
-            <p class="card-text"></p>
-            <div class="cardBtnWrap">
-              <button type="button" class="rounded-pill mr-2 btn btn-outline-info">Know More</button>
-              <button type="button" class="rounded-pill mr-2 btn btn-danger">Add To Cart</button>
+            <div class="col-6">
+                <div class="card">
+                    <div class="card-header p-3">
+                        <h3>Fill Form</h3>
+                    </div>
+                    <div class="card-body p-5">
+                        <form action="{{ route('book-test.store') }}" method="post">
+                            @csrf
+                            <fieldset>
+                                <input type="hidden" name="text_id" value="{{ $text?->id }}">
+                                <div class="mb-3">
+                                    <label for="disabledTextInput" class="form-label fw-bold mb-0">Name</label>
+                                    <input type="text" name="name" value="{{ old('name') }}"
+                                        class="form-control" placeholder="Enter name">
+                                    @error('name')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="mb-3">
+                                    <label for="disabledTextInput" class="form-label fw-bold mb-0">Email</label>
+                                    <input type="text" name="email" value="{{ old('email') }}"
+                                        class="form-control" placeholder="Enter email">
+                                    @error('email')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="mb-3">
+                                    <label for="disabledTextInput" class="form-label fw-bold mb-0">Phone</label>
+                                    <input type="text" name="phone" value="{{ old('phone') }}"
+                                        class="form-control" placeholder="Enter phone">
+                                    @error('phone')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="mb-3">
+                                    <label for="disabledTextInput" class="form-label fw-bold mb-0">Address</label>
+                                    <textarea name="address" class="form-control" rows="4">{{ old('address') }}</textarea>
+                                    @error('address')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div> --}}
-
-            <!-- Add more cards as needed -->
-        </div>
-        <!-- Add Pagination -->
-        <div class="swiper-pagination"></div>
-        <!-- Add Navigation -->
-        <div class="swiper-button-next"></div>
-        <div class="swiper-button-prev"></div>
     </div>
-
-    <!-- Swiper JS -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-
-    <!-- Your custom script to initialize Swiper -->
-    <script>
-        var swiper = new Swiper('.swiper-container', {
-            slidesPerView: 4, // Set the number of slides you want to display
-            spaceBetween: 10,
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-            pagination: {
-                el: '.swiper-pagination',
-                clickable: true,
-            },
-        });
-    </script>
-    <script>
-        // Set the options that I want
-        toastr.options = {
-            "closeButton": true,
-            "newestOnTop": false,
-            "progressBar": true,
-            "positionClass": "toast-top-right",
-            "preventDuplicates": false,
-            "onclick": null,
-            "showDuration": "300",
-            "hideDuration": "1000",
-            "timeOut": "5000",
-            "extendedTimeOut": "1000",
-            "showEasing": "swing",
-            "hideEasing": "linear",
-            "showMethod": "fadeIn",
-            "hideMethod": "fadeOut"
-        }
-    </script>
-    @if (Session::has('success'))
-        <script>
-            toastr.success('{{ session('success') }}', 'Success Message')
-        </script>
-    @endif
-
-    @if (Session::has('error'))
-        <script>
-            toastr.error('{{ session('error') }}', 'Error Message')
-        </script>
-    @endif
 
 </body>
 

@@ -1,8 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\{HomeController, TextController};
+use App\Http\Controllers\{LandingPageController, BookTestController};
 use App\Http\Controllers\Admin\Auth\LoginController;
+use App\Http\Controllers\Admin\{HomeController, TextController};
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,9 +15,23 @@ use App\Http\Controllers\Admin\Auth\LoginController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('/');
+// Route::get('/', function () {
+//     return view('welcome');
+// })->name('/');
+
+Route::controller(LandingPageController::class)->group(function() {
+    Route::get('/', 'index')->name('/');
+});
+Route::group(['prefix' => 'book-test', 'as' => 'book-test.'], function() {
+    Route::controller(BookTestController::class)->group(function() {
+        // Route::get('/', 'index')->name('index');
+        Route::get('/create/{id}', 'create')->name('create');
+        Route::post('/store', 'store')->name('store');
+        // Route::get('/edit/{id}', 'edit')->name('edit');
+        // Route::post('/update/{id}', 'update')->name('update');
+        // Route::get('/delete/{id}', 'delete')->name('delete');
+    });
+});
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::group(["middleware" => ["guest:admin"]], function () {
