@@ -16,4 +16,8 @@ class BookTest extends Model
         'phone',
         'address'
     ];
+
+    public function text(){
+        return $this->belongsTo(Text::class);
+    }
 }

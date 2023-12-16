@@ -16,18 +16,19 @@ class TextController extends Controller
     {
         View::share('nav', 'text');
     }
-    
+
     public function index(): TypeView
     {
         $texts = Text::all();
+        // dd($texts->toArray());
         return view('admin.text.index', compact('texts'));
     }
-    
+
     public function create(): TypeView
     {
         return view('admin.text.create');
     }
-    
+
     public function store(TextRequest $request): RedirectResponse
     {
         $data = $request->all();

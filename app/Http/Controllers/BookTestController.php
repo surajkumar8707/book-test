@@ -5,26 +5,33 @@ namespace App\Http\Controllers;
 use App\Models\Text;
 use App\Mail\UserMail;
 use App\Models\BookTest;
-use Illuminate\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\BookTestRequest;
+use Illuminate\View\View as TypeView;
+use Illuminate\Support\Facades\{View, DB};
 
 class BookTestController extends Controller
 {
+    public function __construct()
+    {
+        View::share('nav', 'book-test');
+    }
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): TypeView
     {
-        //
+        $book_test = BookTest::with(['text'])->orderBy('id', 'DESC')->get();
+        // dd($book_test);
+        return view('book-test.index', compact('book_test'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create(string $id): View
+    public function create(string $id): TypeView
     {
         $id = base64_decode($id);
         $text = Text::find($id);
@@ -45,7 +52,7 @@ class BookTestController extends Controller
             'subject' => 'Lorem ipsum dolor sit amet',
             'message' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit sed diam nonumy eirmod tempor.'
         ];
-        Mail::to($request->email)->send(new UserMail($mail_details));
+        // Mail::to($request->email)->send(new UserMail($mail_details));
 
         //return response
         if ($res) {
@@ -60,7 +67,10 @@ class BookTestController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $id = base64_decode($id);
+        $book_test = BookTest::with(['text'])->find($id);
+        // dd($book_test->toArray());
+        return view('book-test.show', compact('book_test'));
     }
 
     /**

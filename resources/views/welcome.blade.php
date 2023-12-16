@@ -66,11 +66,12 @@
             border: 1px solid #ccc;
             border-radius: 10px;
             overflow: hidden;
-            margin: 10px;
+            /* margin: 10px; */
         }
 
         .card-content {
             padding: 20px;
+            height: 250px;
         }
 
         .offerHeight {
@@ -132,6 +133,24 @@
         .swiper-button-prev {
             left: 10px;
         }
+        .swiper-slide {
+    overflow: hidden;
+}
+
+.card-content {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.card-content:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+        /* .healthCard-item {
+        width: 499.667px;
+        margin-right: 10px;
+        height: 250px;
+    } */
 
         /* Add more styles as needed */
     </style>
@@ -153,7 +172,7 @@
         </div>
     </div>
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-sm navbar-light bg-light">
         <div class="container-fluid">
             <a class="navbar-brand" href="https://diagnostics.mannosarthi.com">
                 <img src="https://diagnostics.mannosarthi.com/wp-content/uploads/2023/12/cropped-logo12-4.jpeg"
@@ -185,7 +204,7 @@
             <!-- Card 1 -->
             @foreach ($texts as $text)
                 {{-- @dd($text->toArray()) --}}
-                <div class="swiper-slide">
+                <div class="swiper-slide healthCard-item">
                     <div class="healthCard">
                         <div class="card-content">
                             {{-- <div class="offerHeight"><small class="offLabel">3% OFF</small></div> --}}
@@ -209,31 +228,12 @@
                 </div>
             @endforeach
 
-            <!-- Card 2 -->
-            {{-- <div class="swiper-slide">
-        <div class="healthCard">
-          <div class="card-content">
-            <div class="offerHeight"><small class="offLabel">33% OFF</small></div>
-            <div class="card-title h5">COMPLETE CARE DIABETES</div>
-            <div class="mb-2 card-subtitle h6">₹999 <span class="text-muted">₹1490</span></div>
-            <div class="search-list-height text-center">
-              <div class="compareSecWrap">
-                <div class="compareSec">Add to compare</div>
-              </div>
-            </div>
-            <p class="card-text"></p>
-            <div class="cardBtnWrap">
-              <button type="button" class="rounded-pill mr-2 btn btn-outline-info">Know More</button>
-              <button type="button" class="rounded-pill mr-2 btn btn-danger">Add To Cart</button>
-            </div>
-          </div>
-        </div>
-      </div> --}}
+
 
             <!-- Add more cards as needed -->
         </div>
         <!-- Add Pagination -->
-        <div class="swiper-pagination"></div>
+        {{-- <div class="swiper-pagination"></div> --}}
         <!-- Add Navigation -->
         <div class="swiper-button-next"></div>
         <div class="swiper-button-prev"></div>
@@ -248,17 +248,34 @@
     <!-- Your custom script to initialize Swiper -->
     <script>
         var swiper = new Swiper('.swiper-container', {
-            slidesPerView: 4, // Set the number of slides you want to display
-            spaceBetween: 10,
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-            pagination: {
-                el: '.swiper-pagination',
-                clickable: true,
-            },
-        });
+    // slidesPerView: 3, // Set the default number of slides you want to display
+    spaceBetween: 20,
+    navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+    },
+    pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+    },
+    breakpoints: {
+        // When window width is >= 768px
+        768: {
+            slidesPerView: 2,
+            spaceBetween: 15,
+        },
+        // When window width is >= 992px
+        992: {
+            slidesPerView: 2,
+            spaceBetween: 20,
+        },
+        // When window width is >= 1200px
+        1200: {
+            slidesPerView: 3,
+            spaceBetween: 30,
+        },
+    },
+});
     </script>
     <script>
         // Set the options that I want
@@ -290,6 +307,52 @@
             toastr.error('{{ session('error') }}', 'Error Message')
         </script>
     @endif
+
+    <!-- Footer Section -->
+    {{-- <footer class="my-5 bg-info text-dark" itemtype="https://schema.org/WPFooter" itemscope="itemscope" id="colophon" role="contentinfo">
+        <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+            <h3>Social Icon</h3>
+            <div class="social-icons-wrapper">
+                <a href="#" target="_blank" class="social-icon"><i class="fab fa-whatsapp"></i></a>
+                <a href="#" target="_blank" class="social-icon"><i class="fab fa-facebook"></i></a>
+                <a href="#" target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a>
+                <a href="#" target="_blank" class="social-icon"><i class="fab fa-twitter"></i></a>
+                <a href="#" target="_blank" class="social-icon"><i class="fab fa-youtube"></i></a>
+            </div>
+            </div>
+            <div class="col-md-3">
+            <h2>Quick Links</h2>
+            <ul class="list-unstyled">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Contact Us</a></li>
+            </ul>
+            </div>
+            <div class="col-md-3">
+            <h2>Get In Touch</h2>
+            <ul class="list-unstyled">
+                <li>
+                <i class="fas fa-map-marker-alt"></i>
+                11/1 Lane No. 1, IInd Floor, Ananda Hospital Campus, Shastri Nagar, Dehradun Uttarakhand, India - 248001
+                </li>
+                <li>
+                <i class="fas fa-phone-alt"></i>
+                1234567890
+                </li>
+                <li>
+                <i class="far fa-envelope"></i>
+                krishnadianostics@gmail.com
+                </li>
+            </ul>
+            </div>
+        </div>
+        </div>
+        <div class="container text-center">
+        <p class="mb-0">Copyright © 2021 Krishna | Design & Developed by gaurav tiwari</p>
+        </div>
+    </footer> --}}
 
 </body>
 

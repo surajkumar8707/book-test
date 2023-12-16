@@ -22,14 +22,12 @@ use App\Http\Controllers\Admin\{HomeController, TextController};
 Route::controller(LandingPageController::class)->group(function() {
     Route::get('/', 'index')->name('/');
 });
+
 Route::group(['prefix' => 'book-test', 'as' => 'book-test.'], function() {
     Route::controller(BookTestController::class)->group(function() {
-        // Route::get('/', 'index')->name('index');
+        Route::get('/', 'index')->name('index');
         Route::get('/create/{id}', 'create')->name('create');
         Route::post('/store', 'store')->name('store');
-        // Route::get('/edit/{id}', 'edit')->name('edit');
-        // Route::post('/update/{id}', 'update')->name('update');
-        // Route::get('/delete/{id}', 'delete')->name('delete');
     });
 });
 
@@ -54,5 +52,18 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
                 Route::get('/delete/{id}', 'delete')->name('delete');
             });
         });
+
+        Route::group(['prefix' => 'book-test', 'as' => 'book-test.'], function() {
+            Route::controller(BookTestController::class)->group(function() {
+                Route::get('/', 'index')->name('index');
+                Route::get('/create/{id}', 'create')->name('create');
+                Route::post('/store', 'store')->name('store');
+                Route::get('/show/{id}', 'show')->name('show');
+                // Route::get('/edit/{id}', 'edit')->name('edit');
+                // Route::post('/update/{id}', 'update')->name('update');
+                // Route::get('/delete/{id}', 'delete')->name('delete');
+            });
+        });
+
     });
 });

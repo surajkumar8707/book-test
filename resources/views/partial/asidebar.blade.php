@@ -3,7 +3,7 @@
       <!-- Brand Logo -->
       <a href="#" class="brand-link elevation-1">
           <img src="{{ URL::asset('/images/avatar.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-1" style="opacity: 1.0">
-          <span class="brand-text font-weight-light">Demo</span>
+          <span class="brand-text font-weight-light">Super Admin</span>
       </a>
 
       <!-- Sidebar -->
@@ -22,7 +22,13 @@
                     <li class="nav-item">
                         <a href="{{ route('admin.text.index') }}" class="{{ $nav == 'text' ? 'active' : '' }} nav-link">
                             <i class="nav-icon fa-brands fa-product-hunt"></i>
-                            <p>Text</p>
+                            <p>Test</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('admin.book-test.index') }}" class="{{ $nav == 'book-test' ? 'active' : '' }} nav-link">
+                            <i class="nav-icon fa-brands fa-product-hunt"></i>
+                            <p>Booked Test</p>
                         </a>
                     </li>
                   @endif
