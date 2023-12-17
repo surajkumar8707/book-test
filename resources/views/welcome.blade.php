@@ -134,23 +134,155 @@
             left: 10px;
         }
         .swiper-slide {
-    overflow: hidden;
-}
+            overflow: hidden;
+        }
 
-.card-content {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: box-shadow 0.3s ease-in-out;
-}
+        .card-content {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s ease-in-out;
+        }
 
-.card-content:hover {
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-}
+        .card-content:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
 
-        /* .healthCard-item {
-        width: 499.667px;
-        margin-right: 10px;
-        height: 250px;
-    } */
+        /* start new navbar style */
+        .navbar {
+            background-color: #fff;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .navbar .logo {
+            float: left;
+        }
+
+        .navbar .logo img {
+            height: 50px; /* Adjust the height as needed */
+            padding: 10px;
+        }
+
+        .navbar .nav-links {
+            float: right;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar .nav-links li {
+            display: inline-block;
+            margin-right: 20px;
+        }
+
+        .navbar .nav-links a {
+            color: #000;
+            text-decoration: none;
+            font-size: 16px;
+            /* padding: 15px; */
+            display: inline-block;
+        }
+
+        .navbar .nav-links a.active {
+            color: #ffd700; /* Set the color for the active link */
+        }
+
+        .footer {
+            background-color: #e4eeee;
+            color: #333;
+            text-align: center;
+            padding: 10px;
+            /* position: sticky; */
+            bottom: 0;
+            width: 100%;
+        }
+        .footer {
+            background-color: #e4eeee;
+            color: #000;
+            text-align: center;
+            padding: 40px 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .footer-quick-links,
+        .footer-contact {
+            flex: 1;
+            min-width: 200px;
+            margin-bottom: 20px;
+        }
+
+        .footer-quick-links h4,
+        .footer-contact h4 {
+            color: #ffd700;
+        }
+
+        .footer-quick-links ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-quick-links ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a,
+        .footer-quick-links a,
+        .footer-contact p {
+            color: #000;
+            text-decoration: none;
+        }
+
+        .footer-links a:hover,
+        .footer-quick-links a:hover {
+            color: #ffd700; /* Change the color on hover */
+        }
+
+        .copyright {
+            background-color: #e4eeee;
+            color: #000;
+            text-align: center;
+            padding: 10px 0;
+            order: 3;
+        }
+
+        @media screen and (max-width: 600px) {
+            .navbar .logo {
+                text-align: center;
+                width: 100%;
+                float: none;
+            }
+
+            .navbar .nav-links {
+                float: flex !important;
+                text-align: center;
+                width: 100%;
+                padding-top: 5px;
+            }
+
+            .navbar .nav-links li {
+                display: block;
+                margin: 0;
+                margin-bottom: 10px;
+            }
+
+            .footer {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .footer-quick-links,
+            .footer-contact {
+                width: 100%;
+                text-align: center;
+            }
+
+            .footer-quick-links,
+            .footer-contact {
+                margin-bottom: 20px;
+            }
+        }
 
         /* Add more styles as needed */
     </style>
@@ -172,9 +304,9 @@
         </div>
     </div>
 
-    <nav class="navbar navbar-expand-sm navbar-light bg-light">
+    {{-- <nav class="navbar navbar-expand-sm navbar-light bg-light">
         <div class="container-fluid">
-            <a class="navbar-brand" href="https://diagnostics.mannosarthi.com">
+            <a class="navbar-brand" href="{{ url('') }}">
                 <img src="https://diagnostics.mannosarthi.com/wp-content/uploads/2023/12/cropped-logo12-4.jpeg"
                     alt="Logo" class="img-fluid" style="width: 30%;">
             </a>
@@ -185,7 +317,7 @@
             <div class="collapse navbar-collapse" id="navbarScroll">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link text-dark" href="https://diagnostics.mannosarthi.com/home">Home</a>
+                        <a class="nav-link text-dark" href="{{ url('') }}">Home</a>
                     </li>
 
                     <li class="nav-item">
@@ -195,6 +327,16 @@
                 </ul>
             </div>
         </div>
+    </nav> --}}
+
+    <nav class="navbar">
+        <div class="logo">
+            <img src="https://diagnostics.mannosarthi.com/wp-content/uploads/2023/12/cropped-logo12-4.jpeg" alt="Logo">
+        </div>
+        <ul class="nav-links active">
+            <li><a class="active" href="{{ url('') }}">Home</a></li>
+            <li><a href="{{ route('admin.login') }}">Login</a></li>
+        </ul>
     </nav>
 
 
@@ -309,50 +451,26 @@
     @endif
 
     <!-- Footer Section -->
-    {{-- <footer class="my-5 bg-info text-dark" itemtype="https://schema.org/WPFooter" itemscope="itemscope" id="colophon" role="contentinfo">
-        <div class="container">
-        <div class="row">
-            <div class="col-md-6">
-            <h3>Social Icon</h3>
-            <div class="social-icons-wrapper">
-                <a href="#" target="_blank" class="social-icon"><i class="fab fa-whatsapp"></i></a>
-                <a href="#" target="_blank" class="social-icon"><i class="fab fa-facebook"></i></a>
-                <a href="#" target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a>
-                <a href="#" target="_blank" class="social-icon"><i class="fab fa-twitter"></i></a>
-                <a href="#" target="_blank" class="social-icon"><i class="fab fa-youtube"></i></a>
-            </div>
-            </div>
-            <div class="col-md-3">
-            <h2>Quick Links</h2>
-            <ul class="list-unstyled">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About Us</a></li>
-                <li><a href="#">Contact Us</a></li>
+    <footer class="footer mt-5">
+        <div class="footer-quick-links">
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a href="{{ url('') }}">Home</a></li>
+                <li><a href="{{ route('admin.login') }}">Login</a></li>
             </ul>
-            </div>
-            <div class="col-md-3">
-            <h2>Get In Touch</h2>
-            <ul class="list-unstyled">
-                <li>
-                <i class="fas fa-map-marker-alt"></i>
-                11/1 Lane No. 1, IInd Floor, Ananda Hospital Campus, Shastri Nagar, Dehradun Uttarakhand, India - 248001
-                </li>
-                <li>
-                <i class="fas fa-phone-alt"></i>
-                1234567890
-                </li>
-                <li>
-                <i class="far fa-envelope"></i>
-                krishnadianostics@gmail.com
-                </li>
-            </ul>
-            </div>
         </div>
+
+        <div class="footer-contact">
+            <h4>Get in Touch</h4>
+            <p>Email: krishnadianostics@gmail.com</p>
+            <p>Phone: 1234567890</p>
+            <p>Address: 11/1 Lane No. 1, IInd Floor, Ananda Hospital Campus, Shastri Nagar, Dehradun Uttarakhand, India - 248001</p>
         </div>
-        <div class="container text-center">
-        <p class="mb-0">Copyright © 2021 Krishna | Design & Developed by gaurav tiwari</p>
-        </div>
-    </footer> --}}
+
+        <div class="copyright" style="width: 100%; margin:0px;padding:0px">
+        <p>&copy; 2021 Krishna | Design & Developed by gaurav tiwari.</p>
+    </div>
+    </footer>
 
 </body>
 

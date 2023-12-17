@@ -134,6 +134,142 @@
         }
 
         /* Add more styles as needed */
+
+
+        /* start new navbar style */
+        .navbar {
+            background-color: #fff;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .navbar .logo {
+            float: left;
+        }
+
+        .navbar .logo img {
+            height: 50px; /* Adjust the height as needed */
+            padding: 10px;
+        }
+
+        .navbar .nav-links {
+            float: right;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar .nav-links li {
+            display: inline-block;
+            margin-right: 20px;
+        }
+
+        .navbar .nav-links a {
+            color: #000;
+            text-decoration: none;
+            font-size: 16px;
+            /* padding: 15px; */
+            display: inline-block;
+        }
+
+        .footer {
+            background-color: #e4eeee;
+            color: #333;
+            text-align: center;
+            padding: 10px;
+            /* position: sticky; */
+            bottom: 0;
+            width: 100%;
+        }
+        .footer {
+            background-color: #e4eeee;
+            color: #000;
+            text-align: center;
+            padding: 40px 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .footer-quick-links,
+        .footer-contact {
+            flex: 1;
+            min-width: 200px;
+            margin-bottom: 20px;
+        }
+
+        .footer-quick-links h4,
+        .footer-contact h4 {
+            color: #ffd700;
+        }
+
+        .footer-quick-links ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-quick-links ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a,
+        .footer-quick-links a,
+        .footer-contact p {
+            color: #000;
+            text-decoration: none;
+        }
+
+        .footer-links a:hover,
+        .footer-quick-links a:hover {
+            color: #ffd700; /* Change the color on hover */
+        }
+
+        .copyright {
+            background-color: #e4eeee;
+            color: #000;
+            text-align: center;
+            padding: 10px 0;
+            order: 3;
+        }
+
+        @media screen and (max-width: 600px) {
+            .navbar .logo {
+                text-align: center;
+                width: 100%;
+                float: none;
+            }
+
+            .navbar .nav-links {
+                float: flex !important;
+                text-align: center;
+                width: 100%;
+                padding-top: 5px;
+            }
+
+            .navbar .nav-links li {
+                display: block;
+                margin: 0;
+                margin-bottom: 10px;
+            }
+
+            .footer {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .footer-quick-links,
+            .footer-contact {
+                width: 100%;
+                text-align: center;
+            }
+
+            .footer-quick-links,
+            .footer-contact {
+                margin-bottom: 20px;
+            }
+        }
+        /* end new navbar style */
     </style>
 </head>
 
@@ -153,34 +289,20 @@
         </div>
     </div>
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="https://diagnostics.mannosarthi.com">
-                <img src="https://diagnostics.mannosarthi.com/wp-content/uploads/2023/12/cropped-logo12-4.jpeg"
-                    alt="Logo" class="img-fluid" style="width: 30%;">
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
-                aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarScroll">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" href="https://diagnostics.mannosarthi.com/home">Home</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" href="{{ route('admin.login') }}">Login</a>
-                    </li>
-
-                </ul>
-            </div>
+    <nav class="navbar">
+        <div class="logo">
+            <img src="https://diagnostics.mannosarthi.com/wp-content/uploads/2023/12/cropped-logo12-4.jpeg" alt="Logo">
         </div>
+        <ul class="nav-links">
+            <li><a href="{{ url('') }}">Home</a></li>
+            <li><a href="{{ route('admin.login') }}">Login</a></li>
+        </ul>
     </nav>
+
 
     <div class="container mb-5">
         <div class="row">
-            <div class="col-6">
+            <div class="col-md-6">
                 <div class="card">
                     <div class="card-header p-3">
                         <h3>Schedule</h3>
@@ -223,7 +345,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-6">
+            <div class="col-md-6">
                 <div class="card">
                     <div class="card-header p-3">
                         <h3>Fill Form</h3>
@@ -272,6 +394,28 @@
             </div>
         </div>
     </div>
+
+
+    <footer class="footer mt-5">
+        <div class="footer-quick-links">
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a href="{{ url('') }}">Home</a></li>
+                <li><a href="{{ route('admin.login') }}">Login</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-contact">
+            <h4>Get in Touch</h4>
+            <p>Email: krishnadianostics@gmail.com</p>
+            <p>Phone: 1234567890</p>
+            <p>Address: 11/1 Lane No. 1, IInd Floor, Ananda Hospital Campus, Shastri Nagar, Dehradun Uttarakhand, India - 248001</p>
+        </div>
+
+        <div class="copyright" style="width: 100%; margin:0px;padding:0px">
+        <p>&copy; 2021 Krishna | Design & Developed by gaurav tiwari.</p>
+    </div>
+    </footer>
 
 </body>
 
