@@ -18,9 +18,10 @@ class LandingPageController extends Controller
         if(isset($request->search) and !empty($request->search)){
             $texts = $texts->where('name', 'like', '%' . $request->search . '%');
         }
-        $texts = $texts->take(10)->orderBy('id','ASC')->get();
-        $all_texts = Text::orderBy('id','ASC')->get();
-        // dd($texts);
+        $all_texts = $texts->orderBy('id','ASC')->paginate();
+        $texts = $all_texts->take(10);
+
+        // dd($texts, $all_texts);
         return view('welcome', compact('texts', 'all_texts'));
     }
 

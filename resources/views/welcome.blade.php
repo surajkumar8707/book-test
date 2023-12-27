@@ -1155,7 +1155,7 @@
                 {{-- Why All Test --}}
                 <div class="mx-auto mb-4" style="width:90%;">
                     <div class="table-responsive text-dark">
-                        <table class="table table-bordered data-table">
+                        <table class="table table-bordered">
                             <thead>
                                 <tr>
                                     <th>S.No</th>
@@ -1168,8 +1168,24 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @forelse ($all_texts as $key => $text)
+                                    <tr>
+                                        <td>{{ ++$key }}</td>
+                                        <td>{{ $text->name }}</td>
+                                        <td>{{ $text->price }}</td>
+                                        <td>{{ $text->category }}</td>
+                                        <td>{{ $text->reportedon }}</td>
+                                        <td>{{ $text->simple_guideline }}</td>
+                                        <td><a title="Book this test" href="{{ route('book-test.create', $text->id) }}" class="btn btn-info" style="font-size: 15px;">Book Test</a></td>
+                                    </tr>
+                                @empty
+                                    <tr><th colspan="8" class="text-center small">No Test Available in the table</th></tr>
+                                @endforelse
                             </tbody>
                         </table>
+                        <div class="test-pagination">
+                            {{ $all_texts->links() }}
+                        </div>
                     </div>
                 </div>
 
