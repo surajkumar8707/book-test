@@ -192,6 +192,7 @@ return [
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
         'UploadPath' => App\Constants\Mix::class,
         'Lava' => Khill\Lavacharts\Laravel\LavachartsFacade::class,
+        'Datatables' => Yajra\DataTables\Facades\DataTables::class,
     ])->toArray(),
 
 ];

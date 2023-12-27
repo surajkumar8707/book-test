@@ -33,8 +33,9 @@ class BookTestController extends Controller
      */
     public function create(string $id): TypeView
     {
-        $id = base64_decode($id);
+        // $id = base64_decode($id);
         $text = Text::find($id);
+        // dd($text);
         return view('book-test.create', compact('text'));
     }
 
