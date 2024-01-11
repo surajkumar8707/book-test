@@ -25,6 +25,25 @@ class LandingPageController extends Controller
         return view('welcome', compact('texts', 'all_texts'));
     }
 
+    public function searchTestData(Request $request){
+        // dd($request->all());
+        $texts = new Text;
+        if(isset($request->search) and (!empty($request->search))){
+            $texts = $texts->where('name', 'like', '%' . $request->search . '%')->get();
+            if(count($texts) > 0){
+                $texts = $texts->pluck('name');
+                // dd($texts);
+                return response()->json(['status' => 'success', 'data' => $texts]);
+            }
+            else{
+                return response()->json(['status' => 'error', 'message' => 'Search Data not found']);
+            }
+        }
+        else{
+            return response()->json(['status' => 'error', 'message' => 'Search Data is required']);
+        }
+    }
+
     /**
      * Show the form for creating a new resource.
      */

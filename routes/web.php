@@ -22,6 +22,7 @@ use App\Http\Controllers\Admin\{HomeController, TextController};
 Route::controller(LandingPageController::class)->group(function() {
     Route::get('/', 'index')->name('/');
     Route::get('/get-test-data', 'getTestDatatable')->name('get-test-data');
+    Route::get('/search-test-data', 'searchTestData')->name('search.data');
 });
 
 Route::group(['prefix' => 'book-test', 'as' => 'book-test.'], function() {

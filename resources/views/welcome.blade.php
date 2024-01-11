@@ -45,6 +45,24 @@
         <link rel="stylesheet" id="woolentor-block-default-css" href="https://diagnostics.mannosarthi.com/wp-content/plugins/woolentor-addons/woolentor-blocks/src/assets/css/style-index.css?ver=2.7.5" media="all" />
         <style id="classic-theme-styles-inline-css">
             /*! This file is auto-generated */
+            ul#searchResults {
+                display: none;
+                background: white !important;
+                position: absolute;
+                width: 90%;
+                z-index: 999999;
+                top: 20%;
+                max-height: 300px;
+                overflow: auto !important;
+            }
+            ul#searchResults li.list-group-item {
+                cursor: pointer;
+            }
+
+            ul#searchResults li.list-group-item:hover{
+                cursor: pointer;
+                background: #00f1ff26;
+            }
             .wp-block-button__link {
                 color: #fff;
                 background-color: #32373c;
@@ -1106,11 +1124,12 @@
 				</div>
                     <div class="container customLgContent">
                         <div class="search">
-                            <form action="{{ route('/') }}" method="GET">
+                            <form id="search-form" action="{{ route('/') }}" method="GET">
                                 <div class="form-group searchBg">
-                                    <input type="text" value="{{ request()->search }}" name="search" placeholder="Search for test" data-lpignore="true" autocomplete="off" fdprocessedid="cfdpqb" />
+                                    <input type="text" value="{{ request()->search }}" name="search" placeholder="Search for test" data-lpignore="true" autocomplete="off" fdprocessedid="cfdpqb" id="searchInput"/>
                                     <button type="button" fdprocessedid="0994ep"><i class="fas fa-search"></i></button>
                                 </div>
+                                <ul class="list-group" id="searchResults"></ul>
                                 @if(request()->search)
                                     <a href="{{ route('/') }}" class="btn btn-danger">Clear <i class="fa fa-times" aria-hidden="true"></i></a>
                                 @endif
@@ -1387,6 +1406,41 @@
                 {data: 'action', name: 'action', orderable: false, searchable: false},
             ]
         });
+
+        $('#searchInput').on('input', function() {
+                const query = $(this).val();
+                // Send an AJAX request to Laravel backend
+                $.ajax({
+                    url: '{{ route("search.data") }}',
+                    method: 'GET',
+                    data: { 'search': query },
+                    success: function(response) {
+                        // Update the frontend with search results
+                        displaySearchResults(response.data);
+                    },
+                    error: function(error) {
+                        console.error('Error:', error);
+                    }
+                });
+            });
+
+            function displaySearchResults(results) {
+                const searchResults = $('#searchResults');
+                // ul#searchResults
+                searchResults.show();
+                searchResults.empty();
+                $.each(results, function(index, result) {
+                    const listItem = $('<li>').addClass('list-group-item').text(result);
+                    // Handle item click
+                    listItem.on('click', function() {
+                        // Perform further action, e.g., load more details
+                        $('#searchInput').val(result);
+                        $('form#search-form').submit();
+                        console.log('Item clicked:', result);
+                    });
+                    searchResults.append(listItem);
+                });
+            }
 
     });
 
